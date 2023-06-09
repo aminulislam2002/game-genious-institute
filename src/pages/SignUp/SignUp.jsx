@@ -1,5 +1,8 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = () => {
   const {
@@ -9,8 +12,31 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
+  const { createUserWithEmail, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  // TODO: update user name
+
   const onSubmit = (data) => {
     console.log(data);
+    createUserWithEmail(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          console.log("user profile info updated");
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User created successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        })
+        .catch((error) => console.log(error));
+    });
   };
 
   return (
@@ -93,7 +119,7 @@ const SignUp = () => {
           </form>
           <p>
             <small>
-              Already have an account <Link to="/login">Login</Link>
+              Already have an account <Link to="/login">Log In</Link>
             </small>
           </p>
         </div>
