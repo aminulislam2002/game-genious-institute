@@ -15,7 +15,7 @@ const SignUp = () => {
   const { createUserWithEmail, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // TODO: update user name
+  // TODO: update user name and photoURL
 
   const onSubmit = (data) => {
     console.log(data);
@@ -85,6 +85,7 @@ const SignUp = () => {
                 placeholder="Password"
                 className="input input-bordered input-sm"
               />
+              {errors.password?.type === "required" && <p className="text-red-600">Password is required</p>}
 
               <label className="label">
                 <span className="label-text">Confirm Password</span>
@@ -101,7 +102,7 @@ const SignUp = () => {
                 className="input input-bordered input-sm"
               />
 
-              {errors.password?.type === "required" && <p className="text-red-600">Password is required</p>}
+              {errors.password?.type === "required" && <p className="text-red-600">Confirm Password is required</p>}
               {errors.password?.type === "minLength" && <p className="text-red-600">Password must be 6 characters</p>}
               {errors.password?.type === "maxLength" && (
                 <p className="text-red-600">Password must be less than 20 characters</p>
@@ -111,6 +112,19 @@ const SignUp = () => {
                   Password must have one Uppercase one lower case, one number and one special character.
                 </p>
               )}
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                {...register("photoURL", { required: true })}
+                placeholder="Photo URL"
+                className="input input-bordered input-sm"
+              />
+              {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
             </div>
 
             <div className="form-control mt-6">
