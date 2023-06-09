@@ -23,16 +23,28 @@ const SignUp = () => {
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("user profile info updated");
-          reset();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "User created successfully.",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/");
+          const saveUser = { name: data.name, email: data.email, photo: data.photoURL };
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successfully.",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
         })
         .catch((error) => console.log(error));
     });
@@ -139,7 +151,7 @@ const SignUp = () => {
               </button>
             </div>
           </form>
-              <SocialLogin></SocialLogin>
+          <SocialLogin></SocialLogin>
           <p className="text-center text-gray-500 text-xs">
             Already have an account?{" "}
             <Link to="/login" className="text-blue-500">
