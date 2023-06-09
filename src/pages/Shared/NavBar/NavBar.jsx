@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { FaHome } from "react-icons/fa";
 
 const NavBar = () => {
   const { user, logOutUser } = useContext(AuthContext);
@@ -23,7 +24,9 @@ const NavBar = () => {
         <Link to="/classes">Classes</Link>
       </li>
       <li>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/dashboard">
+          <FaHome></FaHome>Dashboard
+        </Link>
       </li>
       <li>
         <Link to="/signUp">Sign Up</Link>

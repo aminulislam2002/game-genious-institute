@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
+import SocialLogin from "../Shared/SocialLogIn/SocialLogin";
 
 const SignUp = () => {
   const {
@@ -14,8 +15,6 @@ const SignUp = () => {
 
   const { createUserWithEmail, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  // TODO: update user name and photoURL
 
   const onSubmit = (data) => {
     console.log(data);
@@ -40,40 +39,35 @@ const SignUp = () => {
   };
 
   return (
-    <>
-      <div>
-        <div className="w-4/12 mx-auto mt-16 shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
+    <div>
+      <div className="flex items-center justify-center min-h-screen bg-gray-100 mt-20">
+        <div className="w-full max-w-md">
+          <h1 className="text-3xl font-bold text-center mb-6">Sign Up</h1>
+          <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4">
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Name</label>
               <input
                 type="text"
                 {...register("name", { required: true })}
                 name="name"
                 placeholder="Name"
-                className="input input-bordered input-sm"
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors.name && <span className="text-red-600">Name is required</span>}
+              {errors.name && <p className="text-red-600 text-xs italic">Name is required</p>}
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
               <input
                 type="email"
                 {...register("email", { required: true })}
                 name="email"
                 placeholder="Email"
-                className="input input-bordered input-sm"
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors.email && <span className="text-red-600">Email is required</span>}
+              {errors.email && <p className="text-red-600 text-xs italic">Email is required</p>}
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
               <input
                 type="password"
                 {...register("password", {
@@ -83,13 +77,23 @@ const SignUp = () => {
                   pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                 })}
                 placeholder="Password"
-                className="input input-bordered input-sm"
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors.password?.type === "required" && <p className="text-red-600">Password is required</p>}
-
-              <label className="label">
-                <span className="label-text">Confirm Password</span>
-              </label>
+              {errors.password?.type === "required" && <p className="text-red-600 text-xs italic">Password is required</p>}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-600 text-xs italic">Password must be 6 characters</p>
+              )}
+              {errors.password?.type === "maxLength" && (
+                <p className="text-red-600 text-xs italic">Password must be less than 20 characters</p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-600 text-xs italic">
+                  Password must have one Uppercase, one lowercase, one number, and one special character.
+                </p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
               <input
                 type="password"
                 {...register("confirmPassword", {
@@ -99,46 +103,52 @@ const SignUp = () => {
                   pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                 })}
                 placeholder="Confirm Password"
-                className="input input-bordered input-sm"
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-
-              {errors.password?.type === "required" && <p className="text-red-600">Confirm Password is required</p>}
-              {errors.password?.type === "minLength" && <p className="text-red-600">Password must be 6 characters</p>}
+              {errors.password?.type === "required" && (
+                <p className="text-red-600 text-xs italic">Confirm Password is required</p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-600 text-xs italic">Password must be 6 characters</p>
+              )}
               {errors.password?.type === "maxLength" && (
-                <p className="text-red-600">Password must be less than 20 characters</p>
+                <p className="text-red-600 text-xs italic">Password must be less than 20 characters</p>
               )}
               {errors.password?.type === "pattern" && (
-                <p className="text-red-600">
-                  Password must have one Uppercase one lower case, one number and one special character.
+                <p className="text-red-600 text-xs italic">
+                  Password must have one Uppercase, one lowercase, one number, and one special character.
                 </p>
               )}
             </div>
-
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Photo URL</span>
-              </label>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Photo URL</label>
               <input
                 type="text"
                 {...register("photoURL", { required: true })}
                 placeholder="Photo URL"
-                className="input input-bordered input-sm"
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
+              {errors.photoURL && <p className="text-red-600 text-xs italic">Photo URL is required</p>}
             </div>
-
-            <div className="form-control mt-6">
-              <input className="btn btn-primary" type="submit" value="Sign Up" />
+            <div className="flex items-center justify-between">
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Sign Up
+              </button>
             </div>
           </form>
-          <p>
-            <small>
-              Already have an account <Link to="/login">Log In</Link>
-            </small>
+              <SocialLogin></SocialLogin>
+          <p className="text-center text-gray-500 text-xs">
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-500">
+              Log In
+            </Link>
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
