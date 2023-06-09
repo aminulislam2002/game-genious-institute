@@ -41,38 +41,38 @@ const DashboardLayout = () => {
 
             <div>
               <ul>
+                {isAdmin && (
+                  <>
+                    <li>
+                      <Link to="/dashboard/manageClasses">Manage Classes</Link>
+                    </li>
+                    <li>
+                      <Link to="/dashboard/manageUsers">Manage Users</Link>
+                    </li>
+                  </>
+                )}
                 {isStudent && (
                   <>
                     <li>
-                      <Link to="/dashboard/selected-classes">My Selected Classes</Link>
+                      <Link to="/dashboard/selectedClasses">My Selected Classes</Link>
                     </li>
                     <li>
-                      <Link to="/dashboard/enrolled-classes">My Enrolled Classes</Link>
+                      <Link to="/dashboard/enrolledClasses">My Enrolled Classes</Link>
                     </li>
                   </>
                 )}
                 {isInstructor && (
                   <>
                     <li>
-                      <Link to="/dashboard/add-class">Add a Class</Link>
+                      <Link to="/dashboard/addClass">Add a Class</Link>
                     </li>
                     <li>
-                      <Link to="/dashboard/my-classes">My Classes</Link>
-                    </li>
-                  </>
-                )}
-                {isAdmin && (
-                  <>
-                    <li>
-                      <Link to="/dashboard/manage-classes">Manage Classes</Link>
-                    </li>
-                    <li>
-                      <Link to="/dashboard/manage-users">Manage Users</Link>
+                      <Link to="/dashboard/myClasses">My Classes</Link>
                     </li>
                   </>
                 )}
 
-                <div className="divider">OR</div>
+                <div className="divider"></div>
 
                 <li>
                   <Link to="/">Home</Link>
