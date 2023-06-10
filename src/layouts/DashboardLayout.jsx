@@ -2,14 +2,18 @@ import { useContext } from "react";
 import { FaHome } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import useAdmin from "../hooks/useAdmin";
+import useInstructor from "../hooks/useInstructor";
+import useStudent from "../hooks/useStudent";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
 
-  // TODO: load data from the server to have dynamic isAdmin, isInstructor, isStudent based on data
-  const isAdmin = true;
-  const isInstructor = false;
-  const isStudent = false;
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
+  const [isStudent] = useStudent();
+
+  console.log({ isAdmin, isInstructor, isStudent });
 
   return (
     <div className="drawer lg:drawer-open">
