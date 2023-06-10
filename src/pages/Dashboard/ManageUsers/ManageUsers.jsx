@@ -1,10 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
 
 const ManageUsers = () => {
-    return (
-        <div>
-            <h1>ManageUsers</h1>
-        </div>
-    );
+  const { data: users = [], refetch } = useQuery(["users"], async () => {
+    const res = await fetch("http://localhost:5000/users");
+    return res.json();
+  });
+
+  return (
+    <div>
+      <h1>ManageUsers {users.length}</h1>
+    </div>
+  );
 };
 
 export default ManageUsers;

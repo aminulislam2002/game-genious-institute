@@ -8,8 +8,8 @@ const DashboardLayout = () => {
 
   // TODO: load data from the server to have dynamic isAdmin, isInstructor, isStudent based on data
   const isAdmin = true;
-  const isInstructor = true;
-  const isStudent = true;
+  const isInstructor = false;
+  const isStudent = false;
 
   return (
     <div className="drawer lg:drawer-open">
