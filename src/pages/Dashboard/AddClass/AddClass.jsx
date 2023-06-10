@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const AddClass = () => {
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -97,6 +99,8 @@ const AddClass = () => {
                 {...register("instructorName", { required: true })}
                 name="instructorName"
                 placeholder="Instructor Name"
+                defaultValue={user.displayName}
+                readOnly
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               {errors.instructorName && <p className="text-red-600 text-xs italic">Instructor Name is required</p>}
@@ -109,6 +113,8 @@ const AddClass = () => {
                 {...register("instructorEmail", { required: true })}
                 name="instructorEmail"
                 placeholder="Instructor Email"
+                defaultValue={user.email}
+                readOnly
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               {errors.instructorEmail && <p className="text-red-600 text-xs italic">Instructor Email is required</p>}
