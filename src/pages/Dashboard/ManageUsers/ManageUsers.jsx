@@ -40,6 +40,39 @@ const ManageUsers = () => {
       });
   };
 
+  const handleDelete = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/users/${user._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              refetch();
+              Swal.fire("Deleted!", "Your user has been deleted.", "success");
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to delete user:", error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+            });
+          });
+      }
+    });
+  };
+
   return (
     <div className="w-full h-full">
       <div className="w-full">
@@ -90,7 +123,7 @@ const ManageUsers = () => {
                     )}
                   </td>
                   <td>
-                    <button className="btn btn-ghost bg-red-600 text-white">
+                    <button onClick={() => handleDelete(user)} className="btn btn-ghost bg-red-600 text-white">
                       <FaTrashAlt />
                     </button>
                   </td>
