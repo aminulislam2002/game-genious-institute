@@ -13,6 +13,7 @@ import ManageClasses from "../pages/Dashboard/ManageClasses/ManageClasses";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import PrivateRoute from "./PrivateRoute";
 import UpdateClass from "../pages/Dashboard/UpdateClass/UpdateClass";
+import Classes from "../pages/Home/Classes/Classes";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/logIn",
         element: <SignIn></SignIn>,
+      },
+      {
+        path: "/Classes",
+        element: <Classes></Classes>,
       },
     ],
   },

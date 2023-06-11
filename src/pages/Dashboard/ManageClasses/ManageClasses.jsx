@@ -130,7 +130,7 @@ const ManageClasses = () => {
                       <button
                         onClick={() => handleMakeStatus(classItem, "approve")}
                         className="btn w-full text-sm bg-indigo-600 text-white"
-                        disabled={classItem.status === "deny"}
+                        disabled={classItem.status === "approve"}
                       >
                         Approve
                       </button>
@@ -139,12 +139,13 @@ const ManageClasses = () => {
                       <button
                         onClick={() => handleMakeStatus(classItem, "deny")}
                         className="btn w-full text-sm bg-green-600 text-white"
-                        disabled={classItem.status === "approve"}
+                        disabled={classItem.status === "deny"}
                       >
                         Deny
                       </button>
                     )}
                   </td>
+
                   <td>
                     <button
                       onClick={() => openFeedbackModal(classItem)}

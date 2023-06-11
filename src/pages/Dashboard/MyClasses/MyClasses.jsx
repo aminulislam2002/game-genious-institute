@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const MyClasses = () => {
+  const { user } = useAuth();
   const { data: classes = [] } = useQuery(["classes"], async () => {
-    const res = await fetch("http://localhost:5000/classes");
+    const res = await fetch(`http://localhost:5000/classes?instructorEmail=${user?.email}`);
     return res.json();
   });
   console.log(classes);
@@ -51,3 +53,19 @@ const MyClasses = () => {
 };
 
 export default MyClasses;
+
+
+
+
+{/* <button
+            disabled={!isLoggedIn || classData.availableSeats === 0}
+            onClick={() => {
+              if (!isLoggedIn) {
+                alert("Please log in before selecting the course.");
+              } else {
+                // Handle class selection
+              }
+            }}
+          >
+            Select
+          </button> */}
