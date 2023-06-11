@@ -9,7 +9,7 @@ const useAxiosSecure = () => {
 
   const axiosSecure = axios.create({
     baseURL: "http://localhost:5000",
-  }); 
+  });
 
   useEffect(() => {
     axiosSecure.interceptors.request.use((config) => {

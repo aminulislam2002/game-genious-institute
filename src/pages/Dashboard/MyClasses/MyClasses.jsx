@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 const MyClasses = () => {
-  const { data: classes = [], refetch } = useQuery(["classes"], async () => {
+  const { data: classes = [] } = useQuery(["classes"], async () => {
     const res = await fetch("http://localhost:5000/classes");
     return res.json();
   });
@@ -30,7 +30,7 @@ const MyClasses = () => {
                   <td className="py-4 px-4">{classItem.name}</td>
                   <td className="py-4 px-4">{classItem.status}</td>
                   <td className="py-4 px-4">{classItem.totalEnrolledStudents}</td>
-                  <td className="py-4 px-4">{classItem.status === "denied" ? classItem.feedback : "-"}</td>
+                  <td className="py-4 px-4">{classItem.feedback || "-"}</td>
                   <td className="py-4 px-4">
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                       Update

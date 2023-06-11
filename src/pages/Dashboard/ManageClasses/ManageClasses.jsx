@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
@@ -7,6 +8,10 @@ const ManageClasses = () => {
     return res.json();
   });
   console.log(classes);
+
+  const [feedback, setFeedback] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedClass, setSelectedClass] = useState(null);
 
   const handleMakeStatus = (classItem, status) => {
     fetch(`http://localhost:5000/classes/status/${classItem._id}`, {
@@ -39,8 +44,48 @@ const ManageClasses = () => {
         });
       });
   };
+
+  const handleSendFeedback = () => {
+    fetch(`http://localhost:5000/classes/feedback/${selectedClass._id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ feedback }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged === true) {
+          refetch();
+          setFeedback("");
+          setModalOpen(false);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `Feedback sent for ${selectedClass.name}!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to send feedback:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      });
+  };
+
+  const openFeedbackModal = (classItem) => {
+    setSelectedClass(classItem);
+    setModalOpen(true);
+  };
+
   return (
-    <div className="w-full h-full bg-gray-100 py-8">
+    <div className="w-full h-full py-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Manage Classes</h1>
         {classes.length === 0 ? (
@@ -63,7 +108,9 @@ const ManageClasses = () => {
             <tbody>
               {classes.map((classItem) => (
                 <tr key={classItem._id} className="border-t">
-                  <td className="py-4 px-4">Class Image</td>
+                  <td className="py-4 px-4">
+                    <img src={classItem.image} alt="Image" />
+                  </td>
                   <td className="py-4 px-4">{classItem.name}</td>
                   <td className="py-4 px-4">{classItem.instructorName}</td>
                   <td className="py-4 px-4">{classItem.instructorEmail}</td>
@@ -78,12 +125,12 @@ const ManageClasses = () => {
                       <span className="badge badge-info">Pending</span>
                     )}
                   </td>
-
                   <td>
                     {classItem.status !== "approve" && (
                       <button
                         onClick={() => handleMakeStatus(classItem, "approve")}
-                        className="btn w-3/1 text-sm bg-indigo-600 text-white"
+                        className="btn w-full text-sm bg-indigo-600 text-white"
+                        disabled={classItem.status === "deny"}
                       >
                         Approve
                       </button>
@@ -91,26 +138,20 @@ const ManageClasses = () => {
                     {classItem.status !== "deny" && (
                       <button
                         onClick={() => handleMakeStatus(classItem, "deny")}
-                        className="btn w-3/2 text-sm bg-green-600 text-white"
+                        className="btn w-full text-sm bg-green-600 text-white"
+                        disabled={classItem.status === "approve"}
                       >
                         Deny
                       </button>
                     )}
                   </td>
-
-                  <td className="py-4 px-4">
-                    {classItem.status === "pending" ? (
-                      <>
-                        <button
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                          disabled={classItem.status !== "pending"}
-                        >
-                          Feedback
-                        </button>
-                      </>
-                    ) : (
-                      "-"
-                    )}
+                  <td>
+                    <button
+                      onClick={() => openFeedbackModal(classItem)}
+                      className="btn w-3/2 text-sm bg-blue-600 text-white"
+                    >
+                      Feedback
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -118,6 +159,27 @@ const ManageClasses = () => {
           </table>
         )}
       </div>
+      {modalOpen && (
+        <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-8">
+            <h2 className="text-lg font-bold mb-4">Feedback</h2>
+            <textarea
+              className="w-full h-24 border border-gray-300 rounded-lg p-2 mb-4"
+              placeholder="Enter your feedback..."
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+            ></textarea>
+            <div className="flex justify-end">
+              <button onClick={handleSendFeedback} className="btn bg-blue-600 text-white">
+                Send
+              </button>
+              <button onClick={() => setModalOpen(false)} className="btn bg-gray-400 text-white ml-2">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
