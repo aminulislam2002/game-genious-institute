@@ -33,8 +33,12 @@ const router = createBrowserRouter([
         element: <SignIn></SignIn>,
       },
       {
-        path: "/Classes",
-        element: <Classes></Classes>,
+        path: "/classes",
+        element: (
+          <PrivateRoute>
+            <Classes></Classes>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -55,20 +59,20 @@ const router = createBrowserRouter([
         element: <ManageUsers></ManageUsers>,
       },
       {
-        path: "selectedClasses",
-        element: <SelectedClasses></SelectedClasses>,
-      },
-      {
-        path: "enrolledClasses",
-        element: <EnrolledClasses></EnrolledClasses>,
-      },
-      {
         path: "addClass",
         element: <AddClass></AddClass>,
       },
       {
         path: "myClasses",
         element: <MyClasses></MyClasses>,
+      },
+      {
+        path: "selectedClasses",
+        element: <SelectedClasses></SelectedClasses>,
+      },
+      {
+        path: "enrolledClasses",
+        element: <EnrolledClasses></EnrolledClasses>,
       },
       {
         path: "updateClass/:id",

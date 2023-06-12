@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageClasses = () => {
-  const { data: classes = [], refetch } = useQuery(["classes"], async () => {
-    const res = await fetch("http://localhost:5000/classes");
-    return res.json();
+  const [axiosSecure] = useAxiosSecure();
+  const { data: manageClasses = [], refetch } = useQuery(["manageClasses"], async () => {
+    const res = await axiosSecure.get("/manageClasses");
+    return res.data;
   });
-  console.log(classes);
 
   const [feedback, setFeedback] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,7 +22,12 @@ const ManageClasses = () => {
       },
       body: JSON.stringify({ status }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to update class status");
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
         if (data.acknowledged === true) {
@@ -53,7 +59,12 @@ const ManageClasses = () => {
       },
       body: JSON.stringify({ feedback }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to send feedback");
+        }
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
         if (data.acknowledged === true) {
@@ -88,7 +99,7 @@ const ManageClasses = () => {
     <div className="w-full h-full py-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Manage Classes</h1>
-        {classes.length === 0 ? (
+        {manageClasses.length === 0 ? (
           <p>No classes found.</p>
         ) : (
           <table className="w-full bg-white shadow-lg rounded-lg">
@@ -106,7 +117,7 @@ const ManageClasses = () => {
               </tr>
             </thead>
             <tbody>
-              {classes.map((classItem) => (
+              {manageClasses.map((classItem) => (
                 <tr key={classItem._id} className="border-t">
                   <td className="py-4 px-4">
                     <img src={classItem.image} alt="Image" />

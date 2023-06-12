@@ -23,11 +23,13 @@ const NavBar = () => {
       <li>
         <Link to="/classes">Classes</Link>
       </li>
-      <li>
-        <Link to="/dashboard">
-          <FaHome></FaHome>Dashboard
-        </Link>
-      </li>
+      {user && (
+        <li>
+          <Link to="/dashboard">
+            <FaHome></FaHome>Dashboard
+          </Link>
+        </li>
+      )}
       <li>
         <Link to="/signUp">Sign Up</Link>
       </li>

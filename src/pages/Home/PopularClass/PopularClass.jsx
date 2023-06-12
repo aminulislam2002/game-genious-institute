@@ -22,7 +22,7 @@ const PopularClass = () => {
       </div>
       <div className="grid grid-cols-3 gap-6">
         {games.map((game) => (
-          <div key={game.id} className="game-card bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+          <div key={game._id} className="game-card bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
             <img src={game.image} alt={game.name} className="mb-4 object-cover h-40 rounded-lg shadow-md" />
             <div>
               <h3 className="text-2xl font-bold mb-2">{game.name}</h3>

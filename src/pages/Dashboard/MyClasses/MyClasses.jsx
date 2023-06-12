@@ -5,17 +5,17 @@ import useAuth from "../../../hooks/useAuth";
 
 const MyClasses = () => {
   const { user } = useAuth();
-  const { data: classes = [] } = useQuery(["classes"], async () => {
-    const res = await fetch(`http://localhost:5000/classes?instructorEmail=${user?.email}`);
+  const { data: myClasses = [] } = useQuery(["myClasses"], async () => {
+    const res = await fetch(`http://localhost:5000/myClasses?instructorEmail=${user?.email}`);
     return res.json();
   });
-  console.log(classes);
+  console.log(myClasses);
 
   return (
     <div className="w-full h-full py-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">My Classes</h1>
-        {classes.length === 0 ? (
+        {myClasses.length === 0 ? (
           <p>No classes found.</p>
         ) : (
           <table className="w-full bg-white shadow-lg rounded-lg">
@@ -29,7 +29,7 @@ const MyClasses = () => {
               </tr>
             </thead>
             <tbody>
-              {classes.map((classItem) => (
+              {myClasses.map((classItem) => (
                 <tr key={classItem._id} className="border-t">
                   <td className="py-4 px-4">{classItem.name}</td>
                   <td className="py-4 px-4">{classItem.status}</td>
@@ -54,10 +54,8 @@ const MyClasses = () => {
 
 export default MyClasses;
 
-
-
-
-{/* <button
+{
+  /* <button
             disabled={!isLoggedIn || classData.availableSeats === 0}
             onClick={() => {
               if (!isLoggedIn) {
@@ -68,4 +66,5 @@ export default MyClasses;
             }}
           >
             Select
-          </button> */}
+          </button> */
+}
