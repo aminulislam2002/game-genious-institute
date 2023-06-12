@@ -123,25 +123,33 @@ const AddClass = () => {
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Available Seats</label>
               <input
-                type="number"
-                {...register("availableSeats", { required: true })}
+                type="text"
+                {...register("availableSeats", {
+                  required: true,
+                  valueAsNumber: true,
+                })}
                 name="availableSeats"
                 placeholder="Available Seats"
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors.availableSeats && <p className="text-red-600 text-xs italic">Available Seats is required</p>}
+              {errors.availableSeats && (
+                <p className="text-red-600 text-xs italic">Available Seats is required and must be a number</p>
+              )}
             </div>
 
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Price</label>
               <input
-                type="number"
-                {...register("price", { required: true })}
+                type="text"
+                {...register("price", {
+                  required: true,
+                  valueAsNumber: true,
+                })}
                 name="price"
                 placeholder="Price"
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors.price && <p className="text-red-600 text-xs italic">Price is required</p>}
+              {errors.price && <p className="text-red-600 text-xs italic">Price is required and must be a number</p>}
             </div>
 
             <div className="flex items-center justify-between">

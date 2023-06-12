@@ -18,18 +18,25 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    createUserWithEmail(data.email, data.password).then((result) => {
+    const userData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      photo: data.photoURL,
+      role: "student",
+    };
+
+    createUserWithEmail(userData.email, userData.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          const saveUser = { name: data.name, email: data.email, photo: data.photoURL };
           fetch("http://localhost:5000/users", {
             method: "POST",
             headers: {
-              "content-type": "application/json",
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(saveUser),
+            body: JSON.stringify(userData),
           })
             .then((res) => res.json())
             .then((data) => {
