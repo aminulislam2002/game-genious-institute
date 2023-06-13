@@ -13,7 +13,8 @@ import ManageClasses from "../pages/Dashboard/ManageClasses/ManageClasses";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import PrivateRoute from "./PrivateRoute";
 import UpdateClass from "../pages/Dashboard/UpdateClass/UpdateClass";
-import Classes from "../pages/Home/Classes/Classes";
+import Classes from "../pages/Classes/Classes";
+import Instructor from "../pages/Instructor/Instructor";
 
 const router = createBrowserRouter([
   {
@@ -34,11 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/classes",
-        element: (
-          <PrivateRoute>
-            <Classes></Classes>
-          </PrivateRoute>
-        ),
+        element: <Classes></Classes>,
+      },
+      {
+        path: "/instructors",
+        element: <Instructor></Instructor>,
       },
     ],
   },

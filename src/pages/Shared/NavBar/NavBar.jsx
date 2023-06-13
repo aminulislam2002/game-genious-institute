@@ -74,7 +74,9 @@ const NavBar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-lg">{navOptions}</ul>
         </div>
-        <div className="navbar-end">{user && <a className="btn">{user?.displayName}</a>}</div>
+        <div className="navbar-end">
+          {user ? <img className="rounded-full w-14 h-14" src={user?.photoURL} alt="" /> : <span>Profile</span>}
+        </div>
       </div>
       <hr />
     </>

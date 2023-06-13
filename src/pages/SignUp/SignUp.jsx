@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -16,8 +16,14 @@ const SignUp = () => {
   const { createUserWithEmail, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const [passwordError, setPasswordError] = useState(false); // Added state variable
+
   const onSubmit = (data) => {
-    console.log(data);
+    if (data.password !== data.confirmPassword) {
+      setPasswordError(true);
+      return;
+    }
+
     const userData = {
       name: data.name,
       email: data.email,
@@ -124,20 +130,22 @@ const SignUp = () => {
                 placeholder="Confirm Password"
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors.password?.type === "required" && (
+              {errors.confirmPassword?.type === "required" && (
                 <p className="text-red-600 text-xs italic">Confirm Password is required</p>
               )}
-              {errors.password?.type === "minLength" && (
+              {errors.confirmPassword?.type === "minLength" && (
                 <p className="text-red-600 text-xs italic">Password must be 6 characters</p>
               )}
-              {errors.password?.type === "maxLength" && (
+              {errors.confirmPassword?.type === "maxLength" && (
                 <p className="text-red-600 text-xs italic">Password must be less than 20 characters</p>
               )}
-              {errors.password?.type === "pattern" && (
+              {errors.confirmPassword?.type === "pattern" && (
                 <p className="text-red-600 text-xs italic">
                   Password must have one Uppercase, one lowercase, one number, and one special character.
                 </p>
               )}
+              {passwordError && <p className="text-red-600 text-xs italic">Passwords do not match</p>}{" "}
+              {/* Password match error */}
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Photo URL</label>
