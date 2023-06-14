@@ -2,33 +2,34 @@ import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="footer mt-20 p-10 bg-black text-white">
+    <footer className="footer pt-20 p-10 bg-black text-white">
       <div>
-        <img src="logo" className="w-40 h-14" alt="" />
+        <h1 className="text-3xl font-bold">GameGenius Institute</h1>
+        <p>Dhaka, Bangladesh</p>
         <div className="text-center font-semibold text-2xl text-purple-800" id="typewriter"></div>
       </div>
       <div>
-        <span className="footer-title">Products</span>
-        <a className="link link-hover">Branding</a>
-        <a className="link link-hover">Design</a>
-        <a className="link link-hover">Marketing</a>
-        <a className="link link-hover">Advertisement</a>
+        <span className="footer-title">Courses</span>
+        <a className="link link-hover">Game Development</a>
+        <a className="link link-hover">Game Design</a>
+        <a className="link link-hover">Game Art</a>
+        <a className="link link-hover">Game Marketing</a>
       </div>
       <div>
-        <span className="footer-title">Company</span>
-        <a className="link link-hover">About us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
+        <span className="footer-title">About Us</span>
+        <a className="link link-hover">Mission</a>
+        <a className="link link-hover">Team</a>
+        <a className="link link-hover">Testimonials</a>
+        <a className="link link-hover">Blog</a>
       </div>
       <div>
-        <span className="footer-title">Legal</span>
-        <a className="link link-hover">Terms of use</a>
-        <a className="link link-hover">Privacy policy</a>
-        <a className="link link-hover">Cookie policy</a>
+        <span className="footer-title">Policies</span>
+        <a className="link link-hover">Terms of Service</a>
+        <a className="link link-hover">Privacy Policy</a>
+        <a className="link link-hover">Cookie Policy</a>
       </div>
       <div>
-        <span className="footer-title">Connect Us</span>
+        <span className="footer-title">Connect with Us</span>
         <div className="flex gap-5">
           <a className="link link-hover">
             <FaFacebook className="w-8 h-8"></FaFacebook>

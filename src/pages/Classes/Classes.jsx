@@ -16,20 +16,12 @@ const Classes = () => {
   console.log(user?.email);
 
   const handleSelectClass = async (classData) => {
-    await fetch(`http://localhost:5000/classes/seat/${classData._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        availableSeats: classData.availableSeats - 1,
-      }),
-    });
-
     const selectedClass = {
       ...classData,
       userEmail: user.email,
     };
+
+    delete selectedClass._id;
 
     fetch(`http://localhost:5000/selectedClasses`, {
       method: "POST",
