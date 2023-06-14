@@ -7,18 +7,19 @@ const Instructor = () => {
   });
 
   return (
-    <div className="container mx-auto bg-gray-100 min-h-screen mt-20">
-      <h1 className="text-3xl font-bold mb-6 text-center">Instructors</h1>
+    <div className="container mx-auto bg-gray-900 min-h-screen mt-20 p-8">
+      <h1 className="text-4xl font-bold mb-8 text-center text-white">Instructors</h1>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {instructors.map((instructor) => (
-          <div key={instructor.id} className="bg-white p-4 rounded-md shadow-md flex">
-            <img className="w-24 h-24 rounded-full mr-4" src={instructor.image} alt={instructor.name} />
-            <div className="flex flex-col justify-between">
-              <div>
-                <h2 className="text-xl font-bold mb-2">{instructor.name}</h2>
-                <p className="text-sm">Email: {instructor.email}</p>
-              </div>
+          <div key={instructor._id} className="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <img className="w-32 h-32 mx-auto rounded-full mb-4" src={instructor.photo} alt={instructor.name} />
+            <div className="text-center">
+              <h2 className="text-lg font-bold mb-2 text-white">{instructor.name}</h2>
+              <p className="text-sm text-gray-300">{instructor.email}</p>
+              <button className="mt-4 px-4 py-2 w-full bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300 ease-in-out">
+                Contact {instructor.name}
+              </button>
             </div>
           </div>
         ))}

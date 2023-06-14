@@ -24,8 +24,8 @@ const DashboardLayout = () => {
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <div className="menu p-4 w-80 h-full bg-base-200 text-base-content flex-row-reverse">
-          <div className="ms-0 me-20">
+        <div className="menu p-4 w-56 h-full text-base-content flex-row-reverse bg-gray-300">
+          <div className="ms-0">
             <div className="p-5">
               <div className="flex justify-center items-center">
                 <div className="text-center">
