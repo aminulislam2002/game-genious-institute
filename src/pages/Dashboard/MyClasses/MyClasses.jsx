@@ -17,7 +17,6 @@ const MyClasses = () => {
     <div className="w-full h-full py-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">My Classes</h1>
-
         <table className="w-full bg-white shadow-lg rounded-lg">
           <thead>
             <tr className="bg-gray-200 text-gray-700 uppercase text-sm">

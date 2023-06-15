@@ -11,7 +11,6 @@ import AddClass from "../pages/Dashboard/AddClass/AddClass";
 import MyClasses from "../pages/Dashboard/MyClasses/MyClasses";
 import ManageClasses from "../pages/Dashboard/ManageClasses/ManageClasses";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
-import PrivateRoute from "./PrivateRoute";
 import UpdateClass from "../pages/Dashboard/UpdateClass/UpdateClass";
 import Classes from "../pages/Classes/Classes";
 import Instructor from "../pages/Instructor/Instructor";
