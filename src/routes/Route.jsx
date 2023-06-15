@@ -15,10 +15,7 @@ import PrivateRoute from "./PrivateRoute";
 import UpdateClass from "../pages/Dashboard/UpdateClass/UpdateClass";
 import Classes from "../pages/Classes/Classes";
 import Instructor from "../pages/Instructor/Instructor";
-import Payment from "../pages/Dashboard/Payment/Payment";
 import AdminRoute from "./AdminRoute";
-import InstructorRoute from "./InstructorRoute";
-import StudentRoute from "./StudentRoute";
 
 const router = createBrowserRouter([
   {
@@ -43,21 +40,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/instructors",
-        element: (
-          <PrivateRoute>
-            <Instructor></Instructor>
-          </PrivateRoute>
-        ),
+        element: <Instructor></Instructor>,
       },
     ],
   },
   {
     path: "/dashboard",
-    element: (
-      <PrivateRoute>
-        <DashboardLayout></DashboardLayout>
-      </PrivateRoute>
-    ),
+    element: <DashboardLayout></DashboardLayout>,
     children: [
       {
         path: "manageClasses",
@@ -77,44 +66,24 @@ const router = createBrowserRouter([
       },
       {
         path: "addClass",
-        element: (
-          <InstructorRoute>
-            <AddClass></AddClass>
-          </InstructorRoute>
-        ),
+        element: <AddClass></AddClass>,
       },
       {
         path: "myClasses",
-        element: (
-          <InstructorRoute>
-            <MyClasses></MyClasses>
-          </InstructorRoute>
-        ),
+        element: <MyClasses></MyClasses>,
       },
       {
         path: "selectedClasses",
-        element: (
-          <StudentRoute>
-            <SelectedClasses></SelectedClasses>
-          </StudentRoute>
-        ),
+        element: <SelectedClasses></SelectedClasses>,
       },
       {
         path: "enrolledClasses",
-        element: (
-          <StudentRoute>
-            <EnrolledClasses></EnrolledClasses>
-          </StudentRoute>
-        ),
+        element: <EnrolledClasses></EnrolledClasses>,
       },
       {
         path: "updateClass/:id",
         element: <UpdateClass></UpdateClass>,
         loader: ({ params }) => fetch(`https://ph-assignment-number-twelve-server.vercel.app/classes/${params.id}`),
-      },
-      {
-        path: "payment",
-        element: <Payment></Payment>,
       },
     ],
   },
