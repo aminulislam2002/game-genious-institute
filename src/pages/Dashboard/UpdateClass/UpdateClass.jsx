@@ -15,7 +15,7 @@ const UpdateClass = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    await fetch(`http://localhost:5000/classes/${singleClassData._id}`, {
+    await fetch(`https://ph-assignment-number-twelve-server.vercel.app/classes/${singleClassData._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

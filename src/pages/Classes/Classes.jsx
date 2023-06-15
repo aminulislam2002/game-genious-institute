@@ -5,12 +5,12 @@ import Swal from "sweetalert2";
 const Classes = () => {
   const { user } = useAuth();
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
-    const res = await fetch("http://localhost:5000/classes?status=approve");
+    const res = await fetch("https://ph-assignment-number-twelve-server.vercel.app/classes?status=approve");
     return res.json();
   });
 
   const { data: currentUser = [] } = useQuery(["currentUser"], async () => {
-    const res = await fetch(`http://localhost:5000/user/${user?.email}`);
+    const res = await fetch(`https://ph-assignment-number-twelve-server.vercel.app/user/${user?.email}`);
     return res.json();
   });
   console.log(user?.email);
@@ -23,7 +23,7 @@ const Classes = () => {
 
     delete selectedClass._id;
 
-    fetch(`http://localhost:5000/selectedClasses`, {
+    fetch(`https://ph-assignment-number-twelve-server.vercel.app/selectedClasses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -5,12 +5,14 @@ import Swal from "sweetalert2";
 const SelectedClasses = () => {
   const { user } = useAuth();
   const { data: selectedClasses = [], refetch } = useQuery(["selectedClasses"], async () => {
-    const res = await fetch(`http://localhost:5000/selectedClasses?userEmail=${user?.email}`);
+    const res = await fetch(
+      `https://ph-assignment-number-twelve-server.vercel.app/selectedClasses?userEmail=${user?.email}`
+    );
     return res.json();
   });
 
   const handleDeleteClass = async (classData) => {
-    await fetch(`http://localhost:5000/selectedClasses/${classData._id}`, {
+    await fetch(`https://ph-assignment-number-twelve-server.vercel.app/selectedClasses/${classData._id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

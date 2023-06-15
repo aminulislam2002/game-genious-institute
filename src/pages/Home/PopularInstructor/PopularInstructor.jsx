@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const PopularInstructor = () => {
   const { data: instructors = [] } = useQuery(["instructors"], async () => {
-    const res = await fetch("http://localhost:5000/users/instructors");
+    const res = await fetch("https://ph-assignment-number-twelve-server.vercel.app/users/instructors");
     return res.json();
   });
   return (

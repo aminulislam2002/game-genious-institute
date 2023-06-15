@@ -37,7 +37,7 @@ const SignUp = () => {
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          fetch("http://localhost:5000/users", {
+          fetch("https://ph-assignment-number-twelve-server.vercel.app/users", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

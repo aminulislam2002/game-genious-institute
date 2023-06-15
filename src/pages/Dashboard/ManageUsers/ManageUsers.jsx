@@ -11,7 +11,7 @@ const ManageUsers = () => {
   });
 
   const handleMakeRole = (user, role) => {
-    fetch(`http://localhost:5000/users/role/${user._id}`, {
+    fetch(`https://ph-assignment-number-twelve-server.vercel.app/users/role/${user._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const ManageUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://ph-assignment-number-twelve-server.vercel.app/users/${user._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

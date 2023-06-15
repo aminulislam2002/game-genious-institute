@@ -15,7 +15,7 @@ const ManageClasses = () => {
   const [selectedClass, setSelectedClass] = useState(null);
 
   const handleMakeStatus = (classItem, status) => {
-    fetch(`http://localhost:5000/classes/status/${classItem._id}`, {
+    fetch(`https://ph-assignment-number-twelve-server.vercel.app/classes/status/${classItem._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const ManageClasses = () => {
   };
 
   const handleSendFeedback = () => {
-    fetch(`http://localhost:5000/classes/feedback/${selectedClass._id}`, {
+    fetch(`https://ph-assignment-number-twelve-server.vercel.app/classes/feedback/${selectedClass._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

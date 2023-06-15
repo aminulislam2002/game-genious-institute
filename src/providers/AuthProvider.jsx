@@ -49,23 +49,25 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentLoggedInUser => {
+    const unsubscribe = onAuthStateChanged(auth, (currentLoggedInUser) => {
       setUser(currentLoggedInUser);
       console.log("Current User: ", currentLoggedInUser);
 
       if (currentLoggedInUser) {
-        axios.post("http://localhost:5000/jwt", { email: currentLoggedInUser.email }).then((data) => {
-          localStorage.setItem("access-token", data.data.token);
-          setLoading(false);
-          console.log(data);
-        });
+        axios
+          .post("https://ph-assignment-number-twelve-server.vercel.app/jwt", { email: currentLoggedInUser.email })
+          .then((data) => {
+            localStorage.setItem("access-token", data.data.token);
+            setLoading(false);
+            console.log(data);
+          });
       } else {
         localStorage.removeItem("access-token");
       }
     });
 
     return () => {
-       return unsubscribe();
+      return unsubscribe();
     };
   }, []);
 
