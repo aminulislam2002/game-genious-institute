@@ -23,9 +23,19 @@ const PopularClass = () => {
             <img src={classItem.image} alt={classItem.name} className="w-full h-40 object-cover rounded-t-lg" />
             <div className="p-6 flex flex-col justify-between">
               <div>
-                <h3 className="text-lg font-semibold mb-2">{classItem.name}</h3>
-                <p className="text-gray-400 text-sm">Instructor: {classItem.instructorName}</p>
-                <p className="text-gray-400 text-sm">Available Seats: {classItem.availableSeats}</p>
+                <h2 className="class-name text-xl font-semibold mb-2 text-white">{classItem.name}</h2>
+                <p className="instructor-name text-sm text-gray-300">
+                  Instructor: <span className="text-green-400">{classItem.instructorName}</span>
+                </p>
+                <p className="available-seats text-sm text-gray-300">
+                  Available Seats:{" "}
+                  <span className={`${classItem.availableSeats === 0 ? "text-red-500" : "text-green-300"}`}>
+                    {classItem.availableSeats}
+                  </span>
+                </p>
+                <p className="price text-sm text-gray-300">
+                  Price: <span className="text-yellow-400">{classItem.price}</span>
+                </p>
               </div>
               <button className="mt-4 bg-purple-600 text-white font-semibold py-2 px-4 rounded hover:bg-purple-700 transition duration-300 ease-in-out">
                 View Details

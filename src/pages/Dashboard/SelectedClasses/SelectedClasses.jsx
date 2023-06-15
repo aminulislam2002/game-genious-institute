@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const SelectedClasses = () => {
   const { user } = useAuth();
@@ -58,9 +59,11 @@ const SelectedClasses = () => {
                 <span className="font-bold">Available Seat:</span> {classItem.availableSeats}
               </p>
               <div className="flex justify-between">
-                <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300 ease-in-out">
-                  Pay Now
-                </button>
+                <Link to="/dashboard/selectedClasses/payment">
+                  <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300 ease-in-out">
+                    Pay Now
+                  </button>
+                </Link>
                 <button
                   className="bg-red-500 text-white px-4 py-2 rounded-md ml-4 hover:bg-red-600 transition-colors duration-300 ease-in-out"
                   onClick={() => handleDeleteClass(classItem)}

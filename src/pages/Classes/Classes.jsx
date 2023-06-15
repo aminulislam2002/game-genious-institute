@@ -74,7 +74,7 @@ const Classes = () => {
                 </p>
                 <p className="available-seats text-sm text-gray-300">
                   Available Seats:{" "}
-                  <span className={`seats-count ${classData.availableSeats === 0 ? "text-red-500" : "text-green-300"}`}>
+                  <span className={`${classData.availableSeats === 0 ? "text-red-500" : "text-green-300"}`}>
                     {classData.availableSeats}
                   </span>
                 </p>
